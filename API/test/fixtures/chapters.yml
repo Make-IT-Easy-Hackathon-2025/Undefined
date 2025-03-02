@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  original_content: MyText
+  ai_summary: MyText
+  generated_questions: MyText
+  needs_processing: false
+  is_processing: false
+  course: one
+
+two:
+  title: MyString
+  original_content: MyText
+  ai_summary: MyText
+  generated_questions: MyText
+  needs_processing: false
+  is_processing: false
+  course: two
