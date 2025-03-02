@@ -1,3 +1,3 @@
 # EduNest
 
-Hackathon 2025 | Undefined team
+Hackathon 2025 | Undefined
