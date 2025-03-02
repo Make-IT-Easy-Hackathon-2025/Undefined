@@ -1,0 +1,100 @@
+<div *ngIf="isLoading">
+  <div class="loader-container">
+    <app-custom-loading></app-custom-loading>
+  </div>
+</div>
+
+<app-theme-toggle class="hidden"></app-theme-toggle>
+
+<div class="onboarding-container" *ngIf="!isLoading" @contentAnimation>
+  <p-toast></p-toast>
+  <!-- Logo -->
+  <img src="/assets/img/edunest_logo.png" alt="Logo" class="logo">
+
+  <!-- Content -->
+  <div class="content-wrapper" @contentAnimation>
+    <p-steps [model]="steps" [activeIndex]="currentStep" [readonly]="true"></p-steps>
+
+    <form [formGroup]="onboardingForm" class="p-4">
+      <!-- Step 1: Personal Information -->
+      <div *ngIf="currentStep === 0" class="step-content" @listAnimation>
+        <div class="text-center mb-4">
+          <img src="/assets/img/person-sketch.png" alt="Person illustration"
+            style="width: 100%; max-width: 200px; margin: 0 auto;">
+
+          <h2>{{ 'ONBOARDING.TELL_US' | translate }}</h2>
+          <p>{{ 'ONBOARDING.TELL_US_DESCRIPTION' | translate }}</p>
+        </div>
+
+        <div class="p-fluid">
+          <div class="field">
+            <label for="firstName">{{ 'ONBOARDING.FIRST_NAME' | translate }}</label>
+            <br>
+            <input id="firstName" type="text" pInputText formControlName="firstname" class="w-full">
+          </div>
+          <div class="field">
+            <label for="lastName">{{ 'ONBOARDING.LAST_NAME' | translate }}</label>
+            <br>
+            <input id="lastName" type="text" pInputText formControlName="lastname" class="w-full">
+          </div>
+
+          <div class="field">
+            <label for="country">{{ 'ONBOARDING.COUNTRY' | translate }}</label>
+            <p-dropdown id="country" [options]="countries" formControlName="country" [style]="{'width':'100%'}"
+              [placeholder]="'ONBOARDING.SELECT_COUNTRY' | translate"></p-dropdown>
+          </div>
+
+          <div class="field">
+            <label for="university">{{ 'ONBOARDING.UNIVERSITY' | translate }}</label>
+            <p-dropdown id="university" [options]="universities" formControlName="university" [style]="{'width':'100%'}"
+              [placeholder]="'ONBOARDING.SELECT_UNIVERSITY' | translate"></p-dropdown>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Education Level -->
+      <div *ngIf="currentStep === 1" class="step-content" @listAnimation>
+        <div class="text-center mb-4">
+          <img src="/assets/img/book-worm.png" alt="Person illustration"
+            style="width: 100%; max-width: 200px; margin: 0 auto;">
+
+          <h2>{{ 'ONBOARDING.EDUCATION_LEVEL' | translate }}</h2>
+          <p>{{ 'ONBOARDING.EDUCATION_LEVEL_DESCRIPTION' | translate }}</p>
+        </div>
+
+        <div class="p-fluid">
+          <div class="field">
+            <p-selectButton [options]="educationLevels" formControlName="educationLevel" [multiple]="false"
+              optionLabel="label" optionValue="value"></p-selectButton>
+          </div>
+
+          <div class="field mt-4">
+            <h3 class="text-center mb-3">{{ 'ONBOARDING.USAGE_PLAN.TITLE' | translate }}</h3>
+            <p-selectButton [options]="usageTypes" formControlName="usagePlan" [multiple]="false" optionLabel="label"
+              optionValue="value"></p-selectButton>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Buttons -->
+      <div class="button-container">
+        <p-button *ngIf="currentStep > 0" [label]="'ONBOARDING.BUTTONS.BACK' | translate" icon="pi pi-arrow-left"
+          (onClick)="previousStep()" styleClass="p-button-secondary"></p-button>
+
+        <p-button *ngIf="currentStep === 0" [label]="'ONBOARDING.BUTTONS.NEXT' | translate" icon="pi pi-arrow-right"
+          iconPos="right" (onClick)="nextStep()" [disabled]="!isPersonalInfoValid()"></p-button>
+
+        <p-button *ngIf="currentStep === 1" [label]="'ONBOARDING.BUTTONS.START_LEARNING' | translate" icon="pi pi-check"
+          (onClick)="onSubmit()" [disabled]="!onboardingForm.valid"></p-button>
+      </div>
+
+      <!-- Progress Indicator -->
+      <div class="progress-indicator">
+        {{ ('ONBOARDING.STEPS_PROGRESS' | translate:{ current: currentStep + 1, total: 2 }) }}
+      </div>
+    </form>
+  </div>
+
+  <!-- Design Element -->
+  <img src="/assets/img/corner-overlay.png" alt="Design Element" class="design-element">
+</div>

@@ -1,0 +1,116 @@
+.onboarding-container {
+    position: relative;
+    min-height: 100vh;
+    background-color: var(--p-content-background);
+    overflow: hidden;
+    box-sizing: border-box;
+    width: 100vw; 
+    overflow-x: hidden;
+}
+
+.logo {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    height: 40px;
+}
+
+.design-element {
+    position: absolute;
+    z-index: 0;
+    max-width: 480px;
+    left: 0;
+    bottom: 0;
+    transform: scale(-1, -1);
+    opacity: 0.5;
+    overflow-x: hidden;
+}
+
+.content-wrapper {
+    position: relative;
+    max-width: 600px;
+    margin: 4rem auto;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    z-index: 11;
+    box-sizing: border-box;
+}
+
+.step-content {
+    margin: 2rem 0;
+
+    h2 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--text-color);
+    }
+
+    p {
+        color: var(--text-color-secondary);
+        margin-bottom: 2rem;
+    }
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    gap: 1rem;
+}
+
+.progress-indicator {
+    text-align: center;
+    margin-top: 1rem;
+    color: var(--text-color-secondary);
+}
+
+:host ::ng-deep {
+    .p-steps {
+        margin-bottom: 2rem;
+    }
+
+    .p-selectbutton {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+
+        .p-button {
+            flex: 1;
+            min-width: 150px;
+        }
+    }
+}
+
+.loader-container {
+    height: 100vh;
+    width: 100vw; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+    .onboarding-container {
+        padding: 1rem;
+    }
+
+    .content-wrapper {
+        margin: 2rem auto;
+        padding: 1rem;
+    }
+
+    .step-content {
+        margin: 1rem 0;
+    }
+
+    .button-container {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .design-element {
+        max-width: 100%;
+        opacity: 0.3;
+    }
+}

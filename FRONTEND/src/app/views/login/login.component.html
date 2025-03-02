@@ -1,0 +1,77 @@
+<div class="main-container">
+  <img src="/assets/img/corner-overlay.png" alt="corner design image" class="corner-overlay">
+  <img src="/assets/img/corner-overlay.png" alt="corner design image" class="corner-overlay-2">
+
+  <app-theme-toggle style="display: none;"></app-theme-toggle>
+
+  <div class="auth-container">
+    <p-toast></p-toast>
+
+    <div class="logo">
+      <img src="/assets/img/edunest_logo.png" alt="Edunest logo">
+    </div>
+
+    <h1>{{ (isLogin ? 'AUTH.TITLE_WELCOME' : 'AUTH.TITLE_LOGIN') | translate }} Edunest</h1>
+    <p class="subtitle">{{ 'AUTH.SUBTITLE' | translate }}</p>
+
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="auth-form">
+      <!-- <p-button
+        [label]="'AUTH.CONTINUE_WITH_GOOGLE' | translate"
+        icon="pi pi-google"
+        styleClass="google-btn p-button-text">
+        (onClick)="signInWithGoogle()">
+      </p-button> -->
+
+      <!-- <p-button
+        [label]="'AUTH.CONTINUE_WITH_APPLE' | translate"
+        icon="pi pi-apple"
+        styleClass="apple-btn p-button-text"
+        (onClick)="signInWithApple()">
+      </p-button> -->
+
+      <!-- <div class="divider">
+        <span>{{ 'AUTH.OR' | translate }}</span>
+      </div> -->
+
+      <div class="p-field">
+        <span class="p-float-label">
+          <label for="email">{{ 'AUTH.EMAIL' | translate }}</label>
+          <input id="email" type="email" [placeholder]="'AUTH.EMAIL_PLACEHOLDER' | translate" pInputText
+            formControlName="email">
+        </span>
+        <small class="p-error" *ngIf="authForm.get('email')?.invalid && authForm.get('email')?.touched">
+          Please enter a valid email
+        </small>
+      </div>
+
+      <div class="p-field">
+        <span class="p-float-label">
+          <label for="password">{{ 'AUTH.PASSWORD' | translate }}</label>
+          <input id="password" type="password" [placeholder]="'AUTH.PASSWORD_PLACEHOLDER' | translate" pInputText
+            formControlName="password">
+        </span>
+        <small class="p-error" *ngIf="authForm.get('password')?.invalid && authForm.get('password')?.touched">
+          Password must be at least 6 characters
+        </small>
+      </div>
+
+      <p-button [label]="(isLogin ? 'AUTH.LOGIN_BUTTON' : 'AUTH.SIGNUP_BUTTON') | translate" styleClass="submit-btn"
+        type="submit" [loading]="loading">
+      </p-button>
+
+      <div class="auth-footer">
+        <ng-container *ngIf="isLogin">
+          <span>{{ 'AUTH.FOOTER_NO_ACCOUNT' | translate }} </span>
+          <a (click)="toggleMode()">{{ 'AUTH.SIGNUP_BUTTON' | translate }}</a>
+        </ng-container>
+        <ng-container *ngIf="!isLogin">
+          <p class="terms-text">
+            {{ 'AUTH.FOOTER_TERMS' | translate }}
+          </p>
+          <span>{{ 'AUTH.FOOTER_HAVE_ACCOUNT' | translate }} </span>
+          <a (click)="toggleMode()">{{ 'AUTH.LOGIN_BUTTON' | translate }}</a>
+        </ng-container>
+      </div>
+    </form>
+  </div>
+</div>

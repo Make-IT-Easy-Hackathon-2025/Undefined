@@ -1,0 +1,208 @@
+{
+  "AUTH": {
+    "TITLE_LOGIN": "Login to",
+    "TITLE_WELCOME": "Welcome to",
+    "SUBTITLE": "Your course warehouse",
+    "CONTINUE_WITH_GOOGLE": "Continue with Google",
+    "CONTINUE_WITH_APPLE": "Continue with Apple",
+    "OR": "or",
+    "EMAIL": "Email",
+    "EMAIL_PLACEHOLDER": "mike.wazowski@monsterinc.com",
+    "PASSWORD": "Password",
+    "PASSWORD_PLACEHOLDER": "mysafepassword123",
+    "LOGIN_BUTTON": "Log In",
+    "SIGNUP_BUTTON": "Sign Up",
+    "FOOTER_NO_ACCOUNT": "Don't have an account?",
+    "FOOTER_HAVE_ACCOUNT": "Already have an account?",
+    "FOOTER_TERMS": "By clicking \"Continue with Apple/Google, Sign Up\" above, you acknowledge that you have read and understood, and agree to Prismara's Terms & Conditions and Privacy Policy."
+  },
+  "SIDEBAR": {
+    "NEW_LESSON": "New Post",
+    "HOME": "Home",
+    "SUBJECTS": "Subjects",
+    "NEW": "New",
+    "SETTINGS": "Settings",
+    "NEW_SOLUTION": "New Solution",
+    "COLLECTION": {
+      "TITLE": "Saved Subjects",
+      "ADD_TO_COLLECTION": "Add to Collection"
+    },
+    "RECENT": "Recently Viewed",
+    "PROFILE": {
+      "NAME_TOO_LONG": "Name too long",
+      "EMAIL_TOO_LONG": "Email too long",
+      "LOGOUT": "Logout"
+    }
+  },
+  "WORKSPACE": {
+    "TODO_LIST": "To-Do List",
+    "ADD_TASK": "Add Task",
+    "EDIT": "Edit",
+    "DELETE": "Delete",
+    "SHARE": "Share",
+    "START_LESSON_TITLE": "Start a Lesson",
+    "START_LESSON_DESC": "Learn something new today",
+    "GET_SOLUTION_TITLE": "Get a Solution",
+    "GET_SOLUTION_DESC": "Solve a problem",
+    "EMPTY_MESSAGE": "Your workspace is empty. Choose one of the above to get started!",
+    "ALL": "All",
+    "COURSES": "Courses",
+    "SOLUTIONS": "Solutions",
+    "DATE": "Date",
+    "NAME": "Name"
+  },
+  "TODO": {
+    "CARD_COLOR": "Card Color",
+    "TO_DO": "To-Do",
+    "IN_PROGRESS": "In Progress",
+    "DONE": "Done",
+    "TITLE": "Title",
+    "DESCRIPTION": "Description",
+    "PRIORITY": "Priority",
+    "DUE_DATE": "Due Dathomee"
+  },
+  "COURSE_WIZARD": {
+    "TITLE": "Create a Lesson",
+    "DESCRIPTION": "Discover new things! Add PDFs, YouTube links, camera images, and more.",
+    "ADD_PDF": "Add PDF",
+    "ADD_OTHERS": "Others",
+    "ADD_IMAGE": "Add Image",
+    "ADD_OTHER_FILE": "Other File",
+    "UPLOADED_FILES": "Uploaded Files",
+    "CHAT_PLACEHOLDER": "Example: I want to create learning material for an integral subject."
+  },
+  "404": {
+    "TITLE": "Error 404: Page Not Found",
+    "DESCRIPTION": "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.",
+    "GO_BACK_BUTTON": "Go home"
+  },
+  "ONBOARDING": {
+    "TELL_US": "Tell Us About Yourself",
+    "TELL_US_DESCRIPTION": "Provide your full name and country to personalize your experience.",
+    "FIRST_NAME": "First Name",
+    "LAST_NAME": "Last Name",
+    "COUNTRY": "Country",
+    "UNIVERSITY": "University",
+    "SELECT_COUNTRY": "Select your country",
+    "SELECT_UNIVERSITY": "Select your university",
+    "EDUCATION_LEVEL": "Your Education Level",
+    "EDUCATION_LEVEL_DESCRIPTION": "Select your current education level.",
+    "USAGE_PLAN": {
+      "TITLE": "How do you plan to use the platform?"
+    },
+    "BUTTONS": {
+      "BACK": "Back",
+      "NEXT": "Next",
+      "START_LEARNING": "Start Learning"
+    },
+    "STEPS_PROGRESS": "{{current}}/{{total}} Steps",
+    "EMPTY_MESSAGE": "Your workspace is empty. Choose one of the above to get started!",
+    "START_A_LESSON": {
+      "TITLE": "Start a Lesson",
+      "DESCRIPTION": "Learn something new"
+    },
+    "GET_A_SOLUTION": {
+      "TITLE": "Get a Solution",
+      "DESCRIPTION": "Solve a problem"
+    },
+    "LOADER": {
+      "LOADING": "Loading, please wait..."
+    },
+    "WORKSPACE": {
+      "TITLE": "Workspace"
+    },
+    "STEPS": {
+      "PERSONAL_INFO": "Personal Info",
+      "EDUCATION": "Education"
+    },
+    "EDUCATION_LEVELS": {
+      "SCHOOL": "School (K to 12th)",
+      "UNDERGRADUATE": "Undergraduate",
+      "MASTER": "Master",
+      "OTHER": "Other"
+    },
+    "USAGE_TYPES": {
+      "EXAM_PREP": "Exam Prep",
+      "GENERAL_STUDY": "General Study",
+      "TUTORING": "Tutoring / Teaching",
+      "OTHER": "Other"
+    }
+  },
+  "VIEW_CHAPTER": {
+    "UNIT_GUIDE": "Unit Guide",
+    "QUESTIONS": "Questions",
+    "FLASHCARDS": "Flashcards",
+    "CHAPTER_COMPLETED": "Chapter Completed",
+    "CHAPTER_COMPLETED_MESSAGE": "Congratulations! You have completed this chapter."
+  },
+  "QUIZ": {
+    "QUESTION": "Question",
+    "NEXT": "Next",
+    "WRONG_ANSWER": "Your answer was not correct. Try again!"
+  },
+  "EXAM": {
+    "LAST_SCORE": "Last Score",
+    "CONGRATULATIONS": "Congratulations!",
+    "FAILED": "Failed",
+    "RETRY_RECOMMENDED": "Retry Recommended",
+    "PASSED_MESSAGE": "Congratulations! You have passed the exam.",
+    "FAILED_MESSAGE": "Unfortunately, you did not pass the exam. Please try again.",
+    "RETRY_RECOMMENDED_MESSAGE": "We recommend you to retry the exam for a better score.",
+    "RETRY": "Retry",
+    "GO_ROADMAP": "Go to Roadmap"
+  },
+  "EXAM_REVIEW": {
+    "EXAM_REVIEW": "Exam Review",
+    "SCORE": "Score",
+    "CORRECT_ANSWER_MESSAGE": "Correct Answer",
+    "WRONG_ANSWER_MESSAGE": "Wrong Answer",
+    "CORRECT_ANSWER": "Correct Answer",
+    "EXPLANATION": "Explanation"
+  },
+  "MESSAGES": {
+    "SUCCESS": "Success",
+    "ERROR": "Error",
+    "MESSAGE_COPIED_TO_CLIPBOARD": "Message copied to clipboard",
+    "FAILED_TO_COPY_MESSAGE": "Failed to copy message"
+  },
+  "PRIORITY": {
+    "LOW": "Low",
+    "MEDIUM": "Medium",
+    "HIGH": "High"
+  },
+  "GAME": {
+    "FLIPCARD": {
+      "TITLE": "Flip Card Matching Game",
+      "DESCRIPTION": "Match the Term with its Definition"
+    },
+    "CORRECT": "Correct",
+    "WRONG": "Wrong"
+  },
+  "SETTINGS": {
+    "TITLE": "Settings",
+    "GENERAL": {
+      "TITLE": "General",
+      "PROFILE": "Profile",
+      "FULL_NAME": "Full Name",
+      "EMAIL": "Email",
+      "SAVE_CHANGES": "Save Changes"
+    },
+    "BILLING": {
+      "TITLE": "Billing",
+      "CURRENT_PLAN": "Current Plan",
+      "MANAGE_SUBSCRIPTION": "Manage Subscription",
+      "HISTORY": "History",
+      "UPGRADE": "Upgrade"
+    },
+    "PREFERENCES": {
+      "TITLE": "Preferences",
+      "EMAIL_NOTIFICATIONS": "Email Notifications",
+      "SOUND_EFFECTS": "Sound Effects",
+      "SAVE": "Save"
+    },
+    "LABEL": {
+      "ON": "On",
+      "OFF": "Off"
+    }
+  }
+}

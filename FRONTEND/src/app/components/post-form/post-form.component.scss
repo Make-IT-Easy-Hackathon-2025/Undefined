@@ -1,0 +1,21 @@
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+button {
+  width: 100%;
+}
+
+::ng-deep {
+  .p-editor-toolbar {
+    display: none;
+  }
+
+  .ql-toolbar.ql-snow {
+    border-top-left-radius: var(--p-content-border-radius);
+    border-top-right-radius: var(--p-content-border-radius);
+    border-color: var(--p-content-border-color);
+  }
+}

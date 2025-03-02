@@ -1,0 +1,8 @@
+.main-container {
+    transition: margin-left 0.3s ease-in-out;
+    margin-left: 0;
+
+    &.sidebar-open {
+        margin-left: 300px;
+    }
+}

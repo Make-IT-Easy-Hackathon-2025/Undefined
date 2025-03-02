@@ -1,0 +1,85 @@
+<!-- Processing Loader -->
+<div *ngIf="isProcessing || !exam" class="loader-container flex-col items-center justify-center">
+  <app-custom-loading></app-custom-loading>
+  <p *ngIf="loadingMessageIndex === 1">Generating exam...</p>
+  <p *ngIf="loadingMessageIndex === 2">Sharpening pencils...</p>
+  <p *ngIf="loadingMessageIndex === 3">Reviewing notes...</p>
+  <p *ngIf="loadingMessageIndex === 4">Brewing coffee...</p>
+  <p *ngIf="loadingMessageIndex === 5">Charging brain cells...</p>
+  <p *ngIf="loadingMessageIndex === 6">Organizing desk...</p>
+  <p *ngIf="loadingMessageIndex === 7">Finding motivation...</p>
+  <p *ngIf="loadingMessageIndex === 8">Clearing distractions...</p>
+  <p *ngIf="loadingMessageIndex === 9">Preparing for greatness...</p>
+  <p *ngIf="loadingMessageIndex === 10">Almost there...</p>
+</div>
+
+<div class="breadcrumb">
+  <p-breadcrumb [model]="breadcrumbItems" [home]="home"></p-breadcrumb>
+</div>
+
+<!-- Exam Content -->
+<div *ngIf="exam?.generated_questions?.questions?.length !== 0 && !isProcessing" class="exam-container p-4">
+
+  <div class="last-score">
+    <p class="text-xl font-bold mb-4" *ngIf="exam?.score && exam?.score != 0">{{ "EXAM.LAST_SCORE" | translate }} {{
+      exam.score }}%</p>
+  </div>
+
+  <!-- Quiz Container -->
+  <div class="quiz-container" *ngIf="!isExamSubmitted">
+    <div class="progress-container flex justify-between items-start w-full">
+      <p class="index-counter">{{ 'QUIZ.QUESTION' | translate }} {{ currentQuestionIndex + 1 }}/{{ totalQuestions }}</p>
+    </div>
+
+    <p>{{ exam?.generated_questions?.questions[currentQuestionIndex].question }}</p>
+
+    <div class="options-container">
+      <div *ngFor="let option of exam.generated_questions.questions[currentQuestionIndex].options; let i = index">
+        <button pButton type="button" class="answer-button" [class.correct]="option.correct"
+          [class.wrong]="option.wrong" [class.selected]="selectedOptionIndex === i" [disabled]="option.disabled"
+          (click)="onSelectOption(option, i)">
+          <span class="letter">{{ 'ABCD'[i] }}. </span>{{ option.text }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Next Button -->
+    <div class="flex justify-end mt-4">
+      <button pButton type="button" [label]="'QUIZ.NEXT' | translate" class="p-button-primary"
+        [disabled]="selectedAnswers[currentQuestionIndex] === null" (click)="goToNextQuestion()"></button>
+    </div>
+  </div>
+
+  <!-- Exam Submitted View -->
+  <div *ngIf="isExamSubmitted" class="submission-container">
+    <p-dialog [(visible)]="displayStatusDialog" modal="true" [closable]="false">
+      <ng-template #header>
+        <h2 class="text-2xl font-bold" *ngIf="examStatus === 'passed'">{{ 'EXAM.CONGRATULATIONS' | translate }}</h2>
+        <h2 class="text-2xl font-bold" *ngIf="examStatus === 'failed'">{{ 'EXAM.FAILED' | translate }}</h2>
+        <h2 class="text-2xl font-bold" *ngIf="examStatus === 'retry_recommended'">{{ 'EXAM.RETRY_RECOMMENDED' |
+          translate }}</h2>
+      </ng-template>
+
+      <img *ngIf="examStatus === 'passed'" src="/assets/img/success.png" alt="Passed" class="mx-auto mb-4"
+        style="width: 100%; max-width: 200px;">
+      <img *ngIf="examStatus === 'failed'" src="/assets/img/failed.png" alt="Failed" class="mx-auto mb-4"
+        style="width: 100%; max-width: 200px;">
+      <img *ngIf="examStatus === 'retry_recommended'" src="/assets/img/thinking.png" alt="Retry Recommended"
+        class="mx-auto mb-4" style="width: 100%; max-width: 200px;">
+
+      <p class="text-lg" *ngIf="examStatus === 'passed'">{{ 'EXAM.PASSED_MESSAGE' | translate }}</p>
+      <p class="text-lg" *ngIf="examStatus === 'failed'">{{ 'EXAM.FAILED_MESSAGE' | translate }}</p>
+      <p class="text-lg" *ngIf="examStatus === 'retry_recommended'">{{ 'EXAM.RETRY_RECOMMENDED_MESSAGE' | translate }}
+      </p>
+
+      <!-- Retry Button -->
+      <button *ngIf="examStatus === 'failed' || examStatus === 'retry_recommended'" pButton type="button"
+        [label]="'EXAM.RETRY' | translate" class="p-button-primary" (click)="retryExam()">
+      </button>
+
+      <!-- Go to Roadmap Button -->
+      <button *ngIf="examStatus === 'passed'" pButton type="button" [label]="'EXAM.GO_ROADMAP' | translate"
+        class="p-button-primary" (click)="goToRoadmap()">
+      </button>
+    </p-dialog>
+  </div>

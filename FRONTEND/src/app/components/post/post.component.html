@@ -1,0 +1,116 @@
+<p-card class="post-container">
+  <ng-template pTemplate="header">
+    <div class="post-header flex">
+      <p-avatar [image]="MAIN_ENDPOINT_URL + user.avatar_url" shape="circle" size="large"></p-avatar>
+      <div class="post-info">
+        <h3>{{ user.firstname }} {{ user.lastname }}</h3>
+        <small>{{ postDate | date: 'medium' }}</small>
+      </div>
+      <div class="spacer flex-1"></div>
+      <a *ngIf="!showDetails" pButton routerLink="/post/{{id}}" class="p-button-text">
+        <i class="pi pi-external-link"></i>
+      </a>
+    </div>
+  </ng-template>
+
+  <div class="post-content">
+    <div class="subject-tag mb-4" *ngIf="subject" (click)="onTagClick()" style="cursor: pointer; width: fit-content; background-color: var(--p-primary-300); padding: 4px 12px; border-radius: 4px; display: flex; align-items: center;">
+      <i class="pi pi-tag mr-2"></i>
+      <p>{{ subject.subject }}</p>
+    </div>
+
+    <h1 class="text-2xl mb-4">{{ title }}</h1>
+    <ng-container *ngIf="content; else loading">
+      <markdown [ngClass]="{'prose': true, 'dark:prose-invert': true}" [data]="content"></markdown>
+    </ng-container>
+    <ng-template #loading>Loading content...</ng-template>
+  </div>
+  <p-divider></p-divider>
+
+  <div class="post-files" *ngIf="files?.length">
+    <h4>Attachments</h4>
+    <div class="file-list mt-2">
+      <div *ngFor="let file of displayedFiles" class="file-item" (click)="onFileClick()">
+        <a [href]="`/roadmap/${file.id}`" pTooltip="Open roadmap" class="file-link">
+          <i class="pi pi-file file-icon"></i>
+          {{ shortenFilename(file.filename) }}
+        </a>
+        <a [href]="`${MAIN_ENDPOINT_URL}${file.url}`" target="_blank" pTooltip="Download {{ file.filename }}"
+          class="file-download">
+          <i class="pi pi-download"></i>
+        </a>
+      </div>
+      <p-tag *ngIf="hiddenFilesCount > 0" value="+{{ hiddenFilesCount }} more" severity="secondary"></p-tag>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="post-actions">
+      <div class="mobile-actions">
+        <p-button [icon]="userLiked ? 'pi pi-thumbs-up-fill' : 'pi pi-thumbs-up'" text (click)="onLike()"
+          class="p-button-sm p-button-rounded">
+          <span class="count">{{ likeCount }}</span>
+        </p-button>
+        <p-button [icon]="userDisliked ? 'pi pi-thumbs-down-fill' : 'pi pi-thumbs-down'" text (click)="onDislike()"
+          class="p-button-sm p-button-rounded">
+          <span class="count">{{ dislikeCount }}</span>
+        </p-button>
+        <p-button icon="pi pi-comment" text (click)="onComment()" class="p-button-sm p-button-rounded">
+          <span class="count">{{ commentCount }}</span>
+        </p-button>
+        <p-button icon="pi pi-share-alt" text (click)="onShare()" class="p-button-sm p-button-rounded">
+        </p-button>
+      </div>
+    </div>
+    <div *ngIf="showDetails" class="comments-section">
+      <h3>Comments</h3>
+
+      <!-- New Comment Form -->
+      <div *ngIf="loggedInUser" class="new-comment-form">
+        <div class="comment-input-wrapper">
+          <!-- Logged-in User Avatar -->
+          <p-avatar [image]="loggedInUser ? MAIN_ENDPOINT_URL + loggedInUser.avatar_url : ''" shape="circle"
+            size="normal" class="user-avatar"></p-avatar>
+
+          <!-- Comment Input -->
+          <input pInputText [(ngModel)]="newComment" placeholder="Write a comment..." rows="1"
+            (keydown.enter)="onSubmitComment()" class="comment-input" />
+
+          <!-- Send Button -->
+          <button class="send-button" (click)="onSubmitComment()" [disabled]="!newComment.trim()">
+            <i class="pi pi-send"></i> <!-- Paper Plane Icon -->
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="!loggedInUser" class="comments-list">
+        <div class="no-comments">
+          Please log in to comment.
+          <br class="mb-4">
+          <p-button label="Login" routerLink="/login" class="p-button-outlined"></p-button>
+        </div>
+      </div>
+
+      <!-- Comments List -->
+      <div *ngIf="loggedInUser" class="comments-list">
+        <div *ngIf="!comments.length" class="no-comments">
+          No comments yet. Be the first to comment!
+        </div>
+
+        <div *ngFor="let comment of comments" class="comment-item">
+          <div class="comment-header">
+            <p-avatar [image]="MAIN_ENDPOINT_URL + comment.user?.avatar_url || 'assets/default-avatar.png'"
+              shape="circle" size="normal"></p-avatar>
+            <div class="comment-info">
+              <h4>{{ comment.user?.firstname + " " + comment.user?.lastname || 'Anonymous' }}</h4>
+              <small>{{ comment.created_at | date: 'medium' }}</small>
+            </div>
+          </div>
+          <div class="comment-content">
+            {{ comment.content }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-card>

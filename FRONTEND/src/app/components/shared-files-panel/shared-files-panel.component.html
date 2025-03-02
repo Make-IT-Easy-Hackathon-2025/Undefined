@@ -1,0 +1,51 @@
+<!-- Toggle Button -->
+<button
+  pButton
+  type="button"
+  label="Shared Files"
+  icon="pi pi-paperclip"
+  (click)="togglePanel()"
+  class="shared-files-toggle p-button-outlined"
+></button>
+
+<!-- Sidebar for shared files -->
+<p-sidebar
+  [(visible)]="visible"
+  position="right"
+  [baseZIndex]="10000"
+  [showCloseIcon]="true"
+  [modal]="true"
+>
+  <h3
+    class="sidebar-header text-xl font-bold p-4 border-surface-300 dark:border-surface-500"
+  >
+    Shared Files
+  </h3>
+  <!-- Updated sidebar content section -->
+  <div class="sidebar-content">
+    <div
+      *ngIf="files && files.length; else noFiles"
+      class="grid grid-cols-2 gap-3 p-3"
+    >
+      <div
+        *ngFor="let file of files"
+        class="file-card bg-surface-200 dark:bg-surface-700 rounded-lg transition-all hover:shadow-sm"
+        (click)="openFile(file)"
+      >
+        <div
+          class="flex flex-col items-center justify-center h-full p-2 text-center"
+        >
+          <i class="pi pi-file text-3xl mb-2"></i>
+          <span
+            class="file-name text-sm font-medium break-words line-clamp-2 px-1"
+          >
+            {{ file.name }}
+          </span>
+        </div>
+      </div>
+    </div>
+    <ng-template #noFiles>
+      <p class="text-center p-4 text-surface-500">No shared files available.</p>
+    </ng-template>
+  </div>
+</p-sidebar>

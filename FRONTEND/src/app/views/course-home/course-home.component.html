@@ -1,0 +1,35 @@
+<div class="breadcrumb">
+  <p-breadcrumb [model]="breadcrumbItems" [home]="home"></p-breadcrumb>
+</div>
+
+<p-toast></p-toast>
+
+<div class="roadmap-container" @listAnimation>
+  <div class="course-card">
+    <h2 class="text-2xl font-bold">{{courseTitle}}</h2>
+  </div>
+
+  <!-- Loop over roadmap items -->
+  <div *ngFor="let item of roadmapData; let i = index" class="roadmap-item">
+
+    <div class="path-item">
+      <!-- Oval Node -->
+      <div class="roadmap-oval" (click)="onRoadmapItemClick(item)" [ngClass]="getRoadmapClass(item, i)"
+        [title]="item.title">
+        <i class="roadmap-icon" [ngClass]="{
+                    'pi pi-book': item.onModel === 'Chapter',
+                    'pi pi-pencil': item.onModel === 'Exam',
+                    'pi pi-question-circle': item.onModel === 'Exam Review',
+                }"></i>
+      </div>
+
+      <!-- Text Label -->
+      <div class="roadmap-label">{{ item.title }}</div>
+
+      <!-- Connector Line -->
+      <div class="roadmap-line" *ngIf="i !== roadmapData.length - 1"
+        [ngStyle]="{ 'background-image': getRoadmapLineImage(i) }">
+      </div>
+    </div>
+  </div>
+</div>

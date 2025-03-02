@@ -1,0 +1,53 @@
+<!-- exam-review.component.html -->
+<div class="main-container">
+    <div class="breadcrumb">
+        <p-breadcrumb [model]="breadcrumbItems" [home]="home"></p-breadcrumb>
+    </div>
+
+    <div *ngIf="examSubmission && originalExam" class="exam-review-container">
+        <!-- Exam Review Title -->
+        <h2 class="text-2xl font-bold mb-4">{{ "EXAM_REVIEW.EXAM_REVIEW" | translate }}</h2>
+        <div class="text-lg font-medium mb-6">{{ "EXAM_REVIEW.SCORE" | translate }}: {{ examSubmission.score }}%</div>
+
+        <!-- Questions List -->
+        <div *ngFor="let result of examSubmission.results; let i = index" class="quiz-container"
+            [class.wrong-selected]="!result.is_correct">
+            <!-- Question -->
+            <p>{{ 'QUIZ.QUESTION' | translate }} {{ result.question_number }}</p>
+            <p>{{ getOriginalQuestion(result.question_number)?.question }}</p>
+
+            <!-- Options -->
+            <div class="options-container">
+                <div *ngFor="let option of getOriginalQuestion(result.question_number)?.options; let j = index">
+                    <button pButton type="button" class="answer-button"
+                        [class.correct]="j + 1 === result.correct_answer"
+                        [class.wrong]="j + 1 === result.selected_answer && !result.is_correct"
+                        [disabled]="true">
+                        <span class="letter">{{ 'ABCD'[j] }}. </span>{{ option.text }}
+                    </button>
+                </div>
+            </div>
+
+            <!-- Correct Answer and Explanation -->
+            <div class="bottom-container">
+                <div *ngIf="result.is_correct" class="wrong-message correct-message">
+                    <i class="pi pi-check-circle"></i>
+                    {{ "EXAM_REVIEW.CORRECT_ANSWER_MESSAGE" | translate }}
+                </div>
+
+                <div *ngIf="!result.is_correct" class="wrong-message">
+                    <i class="pi pi-times-circle"></i>
+                    {{ "EXAM_REVIEW.WRONG_ANSWER_MESSAGE" | translate }}
+                </div>
+
+                <div *ngIf="!result.is_correct" class="correct-answer-container">
+                    <p><strong>{{ "EXAM_REVIEW.CORRECT_ANSWER" | translate}}:</strong> {{ getCorrectOptionText(result.question_number) }}</p>
+                </div>
+
+                <div *ngIf="!result.is_correct" class="explanation">
+                    <p><strong>{{ "EXAM_REVIEW.EXPLANATION" | translate }}:</strong> {{ result.explanation }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<div *ngIf="isLoading">
+    <div class="loader-container">
+        <app-custom-loading></app-custom-loading>
+    </div>
+</div>
+
+<app-theme-toggle class="hidden"></app-theme-toggle>
+
+<img src="/assets/img/corner-overlay.png" *ngIf="!isLoading" alt="Design Element" class="design-element">
+
+<div class="page-not-found-container" *ngIf="!isLoading" @contentAnimation>
+    <p-toast></p-toast>
+    <!-- Logo -->
+    <a routerLink="/">
+        <img src="/assets/img/edunest_logo.png" alt="Logo" class="logo">
+    </a>
+
+    <!-- Content -->
+    <div class="content-wrapper" @contentAnimation>
+        <div class="text-center mb-4">
+            <img src="/assets/img/error-404.png" alt="404 illustration" style="width: 100%; max-width: 200px; margin: 0 auto;">
+
+            <h2 class="font-bold">{{ '404.TITLE' | translate }}</h2>
+            <p>{{ '404.DESCRIPTION' | translate }}</p>
+        </div>
+
+        <div class="button-container">
+            <p-button [label]="'404.GO_BACK_BUTTON' | translate" icon="pi pi-home" routerLink="/" styleClass="p-button-primary"></p-button>
+        </div>
+    </div>
+</div>

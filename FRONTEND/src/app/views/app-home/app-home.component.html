@@ -1,0 +1,6 @@
+<!-- <app-sidebar (sidebarStateChange)="onSidebarStateChange($event)" (workspaceSelected)="onWorkspaceSelected($event)"></app-sidebar> -->
+<app-sidebar *ngIf="isAuthenticated" (sidebarStateChange)="onSidebarStateChange($event)"></app-sidebar>
+<p-toast></p-toast>
+<div class="main-container" [class.sidebar-open]="isSidebarOpen">
+  <router-outlet></router-outlet>
+</div>

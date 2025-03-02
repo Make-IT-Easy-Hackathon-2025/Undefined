@@ -1,0 +1,21 @@
+{
+  "id": "1",
+  "user": {
+    "name": "Jane Doe",
+    "avatar": "https://avatar.iran.liara.run/public"
+  },
+  "content": "# My First Post\nThis is a **test** post.",
+  "postDate": "2021-01-01T12:00:00Z",
+  "likeCount": 20,
+  "commentCount": 5,
+  "files": [
+    {
+      "name": "File1.pdf",
+      "url": "https://example.com/file1.pdf"
+    },
+    {
+      "name": "File2.jpg",
+      "url": "https://example.com/file2.jpg"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+<!-- view-post.component.html -->
+<div class="main-feed-container max-w-2xl w-full mx-auto p-4">
+  <!-- Show logo and "Shared With" text if not authenticated -->
+  <div *ngIf="!isAuthenticated" class="shared-with-container text-center mb-6">
+    <p class="shared-with-text text-sm text-gray-600 mb-2">Shared With</p>
+    <div class="flex items-center gap-2 logo-container justify-center" routerLink="/" style="cursor: pointer;">
+      <img src="/assets/img/edunest_logo.png" alt="Edunest logo" style="width: 48px;">
+      <h1 class="text-primary font-bold text-2xl" style="margin-bottom: 0;">EduNest</h1>
+    </div>
+  </div>
+
+  <!-- If post is loaded, show it; else, show a loading spinner -->
+  <ng-container *ngIf="!isLoading && item != null; else loading">
+    <app-post [id]="item.post.id" [user]="item.user" [title]="item.post.title" [content]="item.post.content"
+      [postDate]="item.post.created_at" [likeCount]="item.likes_count" [dislikeCount]="item.dislikes_count"
+      [commentCount]="item.comments_count" [files]="item.documents" [comments]="item.comments" [hideActions]="false"
+      [showDetails]="true">
+    </app-post>
+  </ng-container>
+
+  <ng-template #loading>
+    <div class="loader-container flex justify-center items-center h-full">
+      <p-progressSpinner styleClass="w-10 h-10"></p-progressSpinner>
+    </div>
+  </ng-template>
+</div>

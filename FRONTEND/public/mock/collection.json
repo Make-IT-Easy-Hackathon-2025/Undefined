@@ -1,0 +1,17 @@
+[
+  {
+    "id": "collection-a",
+    "name": "Lesson A",
+    "icon": "pi pi-folder"
+  },
+  {
+    "id": "collection-b",
+    "name": "Lesson B",
+    "icon": "pi pi-folder"
+  },
+  {
+    "id": "collection-c",
+    "name": "Lesson C",
+    "icon": "pi pi-folder"
+  }
+]

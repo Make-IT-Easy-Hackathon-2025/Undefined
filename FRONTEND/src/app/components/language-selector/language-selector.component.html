@@ -1,0 +1,8 @@
+<div class="language-selector">
+    <p-select [options]="languages" st [(ngModel)]="selectedLanguage" optionLabel="name" optionValue="code"
+                    (onChange)="setLanguage(selectedLanguage)">
+        <ng-template let-option pTemplate="item">  <span class="flag">{{ option.flag }}</span>
+            <span class="language-code">{{ option.name }}</span>
+        </ng-template>
+    </p-select>
+</div>

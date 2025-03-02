@@ -1,0 +1,37 @@
+<div class="subject-container max-w-2xl mx-auto p-4 sm:p-6">
+  <h1 class="text-2xl font-semibold mb-6">Posts for Subject</h1>
+
+  <!-- Search Bar -->
+  <p-inputGroup class="mb-4">
+    <p-inputGroupAddon>
+      <i class="pi pi-search"></i>
+    </p-inputGroupAddon>
+    <input type="text" pInputText [(ngModel)]="searchQuery" placeholder="Search Posts" (keyup.enter)="onSearch()"
+      class="w-full" />
+  </p-inputGroup>
+
+  <!-- Post List -->
+  <div @listAnimation *ngFor="let post of posts" class="mb-6">
+    <app-post [id]="post.id" [user]="post.user" [title]="post.title" [content]="post.content" [postDate]="post.postDate"
+      [files]="post.files" [likeCount]="post.likeCount" [dislikeCount]="post.dislikeCount"
+      [commentCount]="post.commentCount" class="post-item w-full">
+    </app-post>
+  </div>
+
+  <!-- Loading Spinner or Message -->
+  <div *ngIf="isLoading">
+    <div class="loader-container">
+      <app-custom-loading></app-custom-loading>
+    </div>
+  </div>
+
+  <!-- No More Posts Message -->
+  <div *ngIf="!hasMorePosts && posts.length > 0" class="text-center mt-4">
+    <p class="text-gray-500">No more posts to load.</p>
+  </div>
+
+  <app-shared-files-panel [files]="allSharedFiles"></app-shared-files-panel>
+
+  <app-post-detail-dialog *ngIf="showDetailDialog && selectedPost" [post]="selectedPost" (close)="closeDetailDialog()">
+  </app-post-detail-dialog>
+</div>

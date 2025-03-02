@@ -1,0 +1,129 @@
+<p-toast></p-toast>
+<app-settings #settingsDialog></app-settings>
+<button *ngIf="isMobile" (click)="toggleSidebarModeMobile()" class="mobile-toggle-btn">
+  <i class="pi pi-chevron-right"></i>
+</button>
+
+<div class="main-container" [class.sidebar-open]="alwaysOpen">
+  <!-- Custom Drawer -->
+  <nav class="custom-drawer" [class.drawer-always-open]="alwaysOpen" [class.drawer-visible]="drawerVisible"
+    [class.drawer-hidden]="!drawerVisible" (click)="$event.stopPropagation()">
+    <div class="drawer-header-content">
+      <!-- Sidebar Header -->
+      <div class="sidebar-header flex items-center justify-between shrink-0">
+        <div class="flex items-center gap-2 logo-container" routerLink="/" style="cursor: pointer;">
+          <img src="/assets/img/edunest_logo.png" alt="Edunest logo">
+          <h1 class="text-primary font-bold text-2xl">EduNest</h1>
+        </div>
+
+        <button type="button" pButton icon="pi pi-bars" class="toggle-mode-btn" (click)="toggleSidebarMode()"
+          [icon]="alwaysOpen ? 'pi pi-chevron-left' : 'pi pi-chevron-right'"></button>
+      </div>
+    </div>
+
+    <div class="drawer-content">
+      <!-- <div class="language-selector">
+        <app-language-selector></app-language-selector>
+      </div> -->
+      <!-- New Lesson Section -->
+      <div class="new-lesson">
+        <!-- <p-splitbutton [appendTo]="'menu-item'" [label]="'SIDEBAR.NEW_LESSON' | translate" icon="pi pi-plus-circle"
+                    class="new-lesson-splitbutton" styleClass="p-button-sm" [model]="newLessonItems">
+                </p-splitbutton> -->
+        <a pButton type="button" [label]="'SIDEBAR.NEW_LESSON' | translate" icon="pi pi-plus-circle"
+          class="p-button-sm new-lesson-splitbutton" routerLink="/post/create"></a>
+      </div>
+
+      <!-- Menu Items -->
+      <div class=" menu px-6">
+        <div class="list-none">
+          <a class="menu-item flex items-center py-3 cursor-pointer" routerLink="/">
+            <i class="pi pi-home mr-2"></i>
+            <span>{{ 'SIDEBAR.HOME' | translate }}</span>
+          </a>
+          <a class="menu-item flex items-center py-3 cursor-pointer" routerLink="/subjects">
+            <i class="pi pi-book mr-2"></i>
+            <span>{{ 'SIDEBAR.SUBJECTS' | translate }}</span>
+          </a>
+          <button class="menu-item flex items-center py-3 cursor-pointer" (click)="onNavigate('settings')">
+            <i class="pi pi-cog mr-2"></i>
+            <span>{{ 'SIDEBAR.SETTINGS' | translate }}</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Collection -->
+      <div *ngIf="collection.length" class="workspaces px-6 mt-4">
+        <div class="workspaces-title flex items-center justify-between">
+          <span class="font-medium">{{ 'SIDEBAR.COLLECTION.TITLE' | translate }}</span>
+          <a class="text-xs text-primary hover:underline" routerLink="/collection">{{ 'View all' | translate
+            }}</a>
+        </div>
+        <div class="list-none mt-2">
+          <a *ngFor="let item of collection" class="workspace-item cursor-pointer py-1"
+            routerLink="/subject/{{item.id}}">
+            {{ item.title }}
+            <span class="text-xs opacity-40 block"> Year {{ item.year }}</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- RecentItems -->
+      <div *ngIf="recentItems.length" class="workspaces px-6 mt-4">
+        <div class="workspaces-title flex items-center justify-between">
+          <span class="font-medium">{{ 'SIDEBAR.RECENT' | translate }}</span>
+        </div>
+        <div class="list-none mt-2">
+          <a *ngFor="let recent of recentItems" class="workspace-item cursor-pointer py-2 truncate"
+            routerLink="/post/{{recent.id}}">
+            {{ recent.title }}
+          </a>
+        </div>
+      </div>
+
+      <!-- User Profile -->
+      <div class="bottom-bar">
+        <!-- <p-button *ngIf="userInfo?.subscription?.plan == 'free'" [label]="'SETTINGS.BILLING.UPGRADE' | translate"
+                    (onClick)="upgradeDialog()" styleClass="p-button-outlined mb-3 upgrade-button">
+                </p-button> -->
+
+        <div class="theme-toggle">
+          <app-theme-toggle></app-theme-toggle>
+        </div>
+
+        <div class="user-profile mt-auto px-6">
+          <ng-container *ngIf="userInfo; else loadingTemplate">
+            <p-avatar [image]="MAIN_ENDPOINT_URL + userInfo.avatar_url" shape="circle" size="large"
+              class="mr-2 avatar-circle"></p-avatar>
+
+            <div class="profile-info flex flex-col">
+              <span class="font-medium truncate">
+                {{ userInfo.firstname }} {{ userInfo.lastname }}
+              </span>
+              <span class="text-xs text-surface-500">
+                {{ userInfo.email_address?.length > 25 ? (userInfo.email_address | slice:0:25) + '...' :
+                userInfo.email_address
+                }}
+              </span>
+            </div>
+            <button class="arrow-btn" (click)="logout()">
+              <i class="pi pi-sign-out"></i>
+              <span class="hidden">{{ 'SIDEBAR.PROFILE.LOGOUT' | translate }}</span>
+            </button>
+          </ng-container>
+          <ng-template #loadingTemplate>
+            <div class="flex items-center">
+              <p-skeleton shape="circle" size="2rem" class="mr-2"></p-skeleton>
+              <div class="flex flex-col">
+                <p-skeleton width="8rem" height="1rem" class="mb-2"></p-skeleton>
+                <p-skeleton width="10rem" height="1rem"></p-skeleton>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<!-- <app-plans-dialog #plansDialog (planSelected)="onPlanSelected($event)"></app-plans-dialog> -->

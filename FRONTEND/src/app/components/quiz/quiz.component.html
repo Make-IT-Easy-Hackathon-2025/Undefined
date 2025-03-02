@@ -1,0 +1,23 @@
+<div class="quiz-container" [class.wrong-selected]="selectedWrong">
+    <p>{{ 'QUIZ.QUESTION' | translate }} {{ questionIndex + 1 }}</p>
+    <p>{{ quizData.question }}</p>
+
+    <div class="options-container">
+        <div *ngFor="let option of quizData.options; let i = index" class="answer-button-wrapper">
+            <button pButton type="button" class="answer-button" [class.correct]="option.correct"
+                [class.wrong]="option.wrong" [disabled]="option.disabled" (click)="onSelectOption(option)">
+                <span class="letter">{{ 'ABCD'[i] }}. </span>{{ option.text }}
+            </button>
+        </div>
+    </div>
+
+    <div class="bottom-container">
+        <button pButton type="button" label="Explain" icon="pi pi-sparkles" class="explain-button"
+            (click)="quizData.showExplanation = !quizData.showExplanation">
+        </button>
+        <div class="wrong-message" *ngIf="selectedWrong">
+            <i class="pi pi-times-circle"></i>
+            {{ "QUIZ.WRONG_ANSWER" | translate }}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+.language-selector {
+    display: inline-block;
+    position: relative;
+
+    .p-dropdown {
+        font-size: 14px;
+        background-color: var(--surface-a);
+    }
+
+    .flag {
+        font-size: 18px;
+        margin-right: 8px;
+    }
+
+    .language-code {
+        font-weight: 500;
+        font-size: 16px;
+    }
+}
+

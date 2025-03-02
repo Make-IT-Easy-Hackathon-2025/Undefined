@@ -1,0 +1,82 @@
+.settings-dialog {
+    .p-dialog-header {
+        padding: 1.5rem;
+    }
+
+    .p-dialog-content {
+        padding: 0;
+        height: calc(90vh - 120px);
+        max-height: 600px;
+        overflow-y: auto;
+
+        @media screen and (max-width: 640px) {
+            height: calc(100vh - 120px);
+        }
+    }
+
+    .settings-section {
+        padding: 1.5rem;
+    }
+
+    .settings-tabs {
+        .p-tabview-nav {
+            padding: 0 1.5rem;
+
+            @media screen and (max-width: 640px) {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+
+                li {
+                    flex: 0 0 auto;
+                }
+            }
+        }
+
+        .p-tabview-panels {
+            padding: 1.25rem 0;
+        }
+    }
+
+    .p-inputtext:disabled {
+        opacity: 0.7;
+    }
+
+    .billing-card {
+        background: var(--surface-card);
+        border-radius: 8px;
+    }
+
+    .preference-item {
+        padding: 1rem;
+        border-radius: 8px;
+        background: var(--surface-card);
+
+        &:hover {
+            background: var(--surface-hover);
+        }
+    }
+
+    .p-togglebutton {
+        &.p-button {
+            width: 100px;
+        }
+    }
+
+    @media screen and (max-width: 640px) {
+        .p-dialog-header {
+            padding: 1rem;
+        }
+
+        .settings-section {
+            padding: 1rem;
+        }
+    }
+}
+
+::ng-deep .p-overlay-mask {
+    z-index: 22222;
+}

@@ -1,0 +1,94 @@
+<header #siteHeader [class.sidebar-open]="sidebarOpen$ | async">
+  <div class="header-section">
+    <button pButton type="button" icon="pi pi-home" routerLink="/roadmap/{{fileId}}"></button>
+  </div>
+  <div class="header-section mobile-hidden-buttons">
+    <button pButton type="button" [class.active]="activeSection === 'unit-guide'" icon="pi pi-book"
+      [label]="'VIEW_CHAPTER.UNIT_GUIDE' | translate" (click)="onSelectSection('unit-guide')">
+    </button>
+    <button pButton type="button" [class.active]="activeSection === 'questions'" icon="pi pi-question"
+      [label]="'VIEW_CHAPTER.QUESTIONS' | translate" (click)="onSelectSection('questions')">
+    </button>
+    <button pButton type="button" [class.active]="activeSection === 'flashcards'" icon="pi pi-clone"
+      [label]="'VIEW_CHAPTER.FLASHCARDS' | translate" (click)="onSelectSection('flashcards')">
+    </button>
+  </div>
+  <div class="header-section menu-wrapper">
+    <p-menu #menu [model]="menuItems" [popup]="true" [appendTo]="'body'">
+    </p-menu>
+    <button pButton type="button" icon="pi pi-ellipsis-v" (click)="menu.toggle($event)"></button>
+  </div>
+</header>
+
+<div class="content-container m-auto max-w-4xl" [class.sidebar-open]="sidebarOpen$ | async">
+
+  <p-dialog [header]="'VIEW_CHAPTER.CHAPTER_COMPLETED' | translate" [(visible)]="displayCompletionDialog" [modal]="true"
+    [closable]="true" [style]="{ width: 'calc(100vw - 36px)', maxWidth: '450px' }">
+    <img src="/assets/img/party.png" alt="Party happy" style="width: 100%; max-width: 150px; margin: 0 auto;"
+      @contentAnimation>
+
+    <p>{{ 'VIEW_CHAPTER.CHAPTER_COMPLETED_MESSAGE' | translate}}</p>
+    <p-footer>
+      <button pButton type="button" label="OK" (click)="displayCompletionDialog = false"></button>
+    </p-footer>
+  </p-dialog>
+
+  <!-- Unit Guide Section -->
+  <div *ngIf="activeSection === 'unit-guide'">
+    <h2>{{ chapter?.title }}</h2>
+    <ng-container *ngIf="chapter?.ai_summary; else unitGuideSkeleton">
+      <markdown @listAnimation [ngClass]="{'prose': true, 'dark:prose-invert': isDarkMode}" [data]="chapter.ai_summary">
+      </markdown>
+    </ng-container>
+    <!-- <ng-container *ngIf="chapter?.aiSummary; else unitGuideSkeleton">
+          <div class="math-content">
+            <ng-container *ngFor="let fragment of chapter.aiSummary | splitMath">
+              <markdown *ngIf="fragment.type === 'text'"
+                @listAnimation
+                [ngClass]="{'prose': true, 'dark:prose-invert': isDarkMode}"
+                [data]="fragment.content"
+                [inline]="fragment.isInline">
+              </markdown>
+
+              <app-math-jax-paragraph
+                *ngIf="fragment.type === 'math'"
+                [mathString]="fragment.content"
+                [isInline]="fragment.isInline"
+                [ngClass]="{'inline-math': fragment.isInline, 'block-math': !fragment.isInline}">
+              </app-math-jax-paragraph>
+            </ng-container>
+          </div>
+        </ng-container> -->
+    <ng-template #unitGuideSkeleton>
+      <div class="flex flex-col gap-4">
+        <p-skeleton width="100%" height="1.5rem"></p-skeleton>
+        <p-skeleton width="100%" height="1.5rem"></p-skeleton>
+        <p-skeleton width="100%" height="1.5rem"></p-skeleton>
+        <p-skeleton width="80%" height="1.5rem"></p-skeleton>
+      </div>
+    </ng-template>
+  </div>
+
+  <div *ngIf="activeSection === 'questions'">
+    <div *ngFor="let questionEl of chapter.generated_questions.questions; let i = index" @contentAnimation>
+      <app-quiz [quizData]="questionEl" [questionIndex]="i" (correctAnswer)="onCorrectAnswer(i)"></app-quiz>
+    </div>
+  </div>
+
+  <div *ngIf="activeSection === 'flashcards'">
+    <div class="flashcard-navigation">
+      <button pButton type="button" icon="pi pi-chevron-left" (click)="navigateFlashcard('prev')"
+        [disabled]="currentFlashcardIndex === 0"></button>
+
+      <app-flashcard *ngIf="flashcards.length > 0" [flashcard]="flashcards[currentFlashcardIndex]"
+        [currentIndex]="currentFlashcardIndex" [totalCards]="flashcards.length">
+      </app-flashcard>
+
+      <button pButton type="button" icon="pi pi-chevron-right" (click)="navigateFlashcard('next')"
+        [disabled]="currentFlashcardIndex === flashcards.length - 1"></button>
+    </div>
+    <div *ngIf="flashcards.length === 0" class="p-4 text-center">
+      {{ 'VIEW_CHAPTER.NO_FLASHCARDS' | translate }}
+    </div>
+  </div>
+</div>

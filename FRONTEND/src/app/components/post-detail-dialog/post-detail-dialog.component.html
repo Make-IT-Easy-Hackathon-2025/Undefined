@@ -1,0 +1,17 @@
+<div class="dialog-overlay" (click)="onClose()">
+  <div class="dialog-container" @dialogAnimation (click)="$event.stopPropagation()">
+    <div class="dialog-header">
+      <h2>Post Details</h2>
+      <button class="close-button" (click)="onClose()">
+        <i class="pi pi-times"></i>
+      </button>
+    </div>
+
+    <!-- Reuse the existing Post Component -->
+    <div class="post-wrapper">
+      <app-post [id]="post.id" [user]="post.user" [content]="post.content" [postDate]="post.postDate"
+        [likeCount]="post.likeCount" [commentCount]="post.commentCount" [files]="post.files" [comments]="post.comments"
+        [hideActions]="true" [showDetails]="true"></app-post>
+    </div>
+  </div>
+</div>

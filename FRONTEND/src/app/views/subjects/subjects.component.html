@@ -1,0 +1,42 @@
+<div class="subjects-container max-w-2xl mx-auto p-4 sm:p-6" @listAnimation>
+  <h1 class="text-2xl font-semibold mb-6">{{ filterByUser ? 'Your Subjects' : 'All subjects'}}</h1>
+
+  <!-- Search Bar -->
+  <p-inputGroup class="mb-4">
+    <p-inputGroupAddon>
+      <i class="pi pi-search"></i>
+    </p-inputGroupAddon>
+    <input type="text" pInputText [(ngModel)]="searchQuery" placeholder="Search Subjects" (keyup.enter)="onSearch()"
+      class="w-full" />
+  </p-inputGroup>
+
+  <!-- Filters -->
+  <div class="filters flex flex-wrap gap-4 mb-4">
+    <div class="flex-1">
+      <label for="year-filter" class="mr-2">Year</label>
+      <p-dropdown [(ngModel)]="yearFilter" [options]="yearOptions" optionLabel="label" optionValue="value"
+        (onChange)="filterByYear()" placeholder="All Years" class="w-full"></p-dropdown>
+    </div>
+  </div>
+
+  <!-- Subject List -->
+  <div @listAnimation>
+    <div *ngFor="let subject of paginatedSubjects" class="subject-item w-full mb-6 cursor-pointer"
+      (click)="onSubjectClick(subject)">
+      <p-card @contentAnimation>
+        <h3 class="text-xl font-bold">{{ subject.title }}</h3>
+        <p class="text-gray-600">{{ subject.description }}</p>
+        <p class="text-gray-500 mb-4">Year: {{ toRoman(subject.year) }}</p>
+
+        <button pButton type="button" (click)="toggleFollow($event, subject)"
+          [label]="subject.is_subscribed ? 'Leave subject' : 'Join subject'"
+          [ngClass]="subject.is_subscribed? 'p-button-secondary' : 'p-button-primary'">
+        </button>
+      </p-card>
+    </div>
+
+  </div>
+  <!-- Paginator -->
+  <p-paginator [rows]="10" [totalRecords]="filteredSubjects.length" (onPageChange)="onPageChange($event)"
+    class="mt-4"></p-paginator>
+</div>
